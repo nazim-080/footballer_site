@@ -1,0 +1,28 @@
+{% extends 'footballer/base.html' %}
+
+{% block content %}
+	<ul class="list-articles">
+		{% for p in posts %}
+			<li>
+				<div class="article-panel">
+					<p class="first">Позиция: <a href="{{ p.position.get_absolute_url }}">{{ p.position }}</a></p>
+					<p class="last">Дата: {{ p.time_upload|date:"d-m-Y H:i:s" }}</p>
+				</div>
+
+				{% if p.photo %}
+					<p><img class="img-article-left thumb" src="{{ p.photo.url }}"></p>
+				{% endif %}
+
+				<h2>{{ p.name }}</h2>
+				<p>Возраст: {{ p.age }}</p>
+				<p>Клуб: <a href="{{ p.club.get_absolute_url }}">{{ p.club }}</a></p>
+				<p>Страна: <a href="{{ p.country.get_absolute_url }}">{{ p.country }}</a></p>
+				{% autoescape on %}
+					{{ p.content|linebreaks|truncatewords:50 }}
+				{% endautoescape %}
+				<div class="clear"></div>
+				<p class="link-read-post"><a href="{{ p.get_absolute_url }}">Читать пост</a></p>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

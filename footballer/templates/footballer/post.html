@@ -1,0 +1,15 @@
+{% extends 'footballer/base.html' %}
+
+{% block content %}
+	<h1>{{ post.name }}</h1>
+
+	{% if post.photo %}
+		<p><img class="img-article-left" src="{{ post.photo.url }}"></p>
+	{% endif %}
+
+	<p>Возраст: {{ post.age }}</p>
+	<p>Клуб: <a href="{{ post.club.get_absolute_url }}">{{ post.club }}</a></p>
+	<p>Страна: <a href="{{ post.country.get_absolute_url }}">{{ post.country }}</a></p>
+	<p>Позиция: <a href="{{ post.position.get_absolute_url }}">{{ post.position }}</a></p>
+	{{ post.content|linebreaks }}
+{% endblock %}

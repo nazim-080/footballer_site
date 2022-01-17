@@ -1,0 +1,26 @@
+{% extends 'footballer/base.html' %}
+
+{% block content %}
+	<h1>{{ club.name }}</h1>
+
+	{% if club.logo %}
+		<p><img class="img-article-left" src="{{ club.logo.url }}"></p>
+	{% endif %}
+
+	<p>Год основания: {{ club.foundation_year }}</p>
+	<p>Лига: {{ club.league }}</p>
+	<p>Страна: <a href="{{ club.country.get_absolute_url }}">{{ club.country }}</a></p>
+	{{ club.content|linebreaks }}
+
+	{% for p in position %}
+		<div class="article-panel">
+			{{ p.name }}
+		</div>
+		{% for f in footballer %}
+			{% if f.position == p %}
+				<p><a href="{{ f.get_absolute_url }}">{{ f.name }}</a></p>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+
+{% endblock %}
